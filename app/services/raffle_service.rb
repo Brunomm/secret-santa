@@ -5,30 +5,19 @@ class RaffleService
 
   def call
     return false if @campaign.members.count < 3
-
     results = {}
-    members_list = @campaign.members
-    friends_list = @campaign.members
-    i = 0
-    while(members_list.count != i)
-      m = members_list[i]
-      i += 1
-
-      loop do
-        friend = friends_list.sample
-
-        if friends_list.count == 1 and friend == m
-          results = {}
-          members_list = @campaign.members
-          friends_list = @campaign.members
-          break
-        elsif friend != m and results[friend] != m
-          results[m] = friend
-          friends_list -= [friend]
-          break
-        end
-      end
-    end
+    members = @campaign.members.to_a.shuffle
+    set_result!(results, members)
     results
+  end
+
+private
+
+  def set_result!( results, members_shuffled )
+    last_member  = members_shuffled[-1]
+    members_shuffled.map do |m|
+      results[m]  = last_member
+      last_member = m
+    end
   end
 end
