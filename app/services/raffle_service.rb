@@ -1,0 +1,3 @@
+class RaffleService
+
+end
