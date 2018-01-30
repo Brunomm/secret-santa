@@ -2,7 +2,7 @@ class MembersController < ApplicationController
   before_action :authenticate_user!, except: [:opened]
 
   before_action :set_member, only: [:show, :destroy, :update]
-  before_action :is_owner?, only: [:destroy, :update]
+  before_action :is_owner?,  only: [:destroy, :update]
   before_action :set_member_by_token, only: [:opened]
 
   def create
@@ -10,7 +10,7 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.save
-        format.json { render json: @member }
+        format.json { render json: @member, status: 201 }
       else
         format.json { render json: @member.errors, status: :unprocessable_entity }
       end
@@ -38,10 +38,10 @@ class MembersController < ApplicationController
   def opened
     @member.update(open: true)
     gif = Base64.decode64("R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==")
-    render text: gif, type: 'image/gif'
+    render plain: gif, type: 'image/gif'
   end
 
-  private
+private
 
   def set_member
     @member = Member.find(params[:id])

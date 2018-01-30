@@ -1,7 +1,11 @@
 FactoryBot.define do
   factory :member do
-    name         { FFaker::Lorem.word }
+    transient do
+      user { build(:user) }
+    end
+
+    name         { FFaker::Name.name }
     email        { FFaker::Internet.email }
-    campaign
+    campaign     { build(:campaign, user: user) }
   end
 end
