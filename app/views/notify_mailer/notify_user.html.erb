@@ -1,0 +1,35 @@
+<container class="body-drip">
+  <spacer size="16"></spacer>
+
+  <!-- <center> -->
+    <row>
+      <columns large="2">
+      </columns>
+      <columns large="1" class="center">
+        <img src="<%= ActionMailer::Base.default_url_options[:host] %>/assets/logo.png" alt="">
+      </columns>
+      <columns large="8">
+        <h4>Nosso Amigo Secreto</h4>
+      </columns>
+    </row>
+  <!-- </center> -->
+
+  <spacer size="16"></spacer>
+
+  <row>
+    <columns>
+      <h4 class="text-center"><%= @campaign.title %></h4>
+      <p class="text-center"><b><%= (@campaign.event_date)? "#{@campaign.event_date.strftime("%d/%m/%y")} | " : '' %></b><b><%= @campaign.location %></b></p>
+      <spacer size="16"></spacer>
+      <p class="text-center"><%= @campaign.description %></p>
+    </columns>
+  </row>
+  <hr/>
+  <row>
+    <columns>
+      <spacer size="4"></spacer>
+      <p class="text-center">Olá <%= @user.name %>, </p>
+      <p class="text-center">Houve um problema no envio do e-mail da sua campanha, por favor tente novamnete.</p>
+    </columns>
+  </row>
+</container>
