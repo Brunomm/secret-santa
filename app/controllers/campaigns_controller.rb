@@ -8,7 +8,7 @@ class CampaignsController < ApplicationController
   end
 
   def index
-    @campaigns = current_user.campaigns
+    @campaigns = current_user.campaigns.order(created_at: :desc)
   end
 
   def create
