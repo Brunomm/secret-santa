@@ -37,7 +37,7 @@ class CampaignsController < ApplicationController
     @campaign.destroy
 
     respond_to do |format|
-      format.json { render json: true }
+      format.json { render json: true}
     end
   end
 
