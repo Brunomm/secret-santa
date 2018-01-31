@@ -66,38 +66,40 @@
           <div class="member_list">
             <% @campaign.members.each do |m| %>
               <div class="member" id="member_<%= m.id %>">
-                <div class="row">
-                  <div class="col s12 m5 input-field">
-                    <input id="name" type="text" class="validate" value="<%= m.name %>">
-                    <label for="name" class="active">Nome</label>
+                <%= form_for( m, html: {class: 'member-form'}) do |f| %>
+                  <div class="row">
+                    <div class="col s12 m5 input-field">
+                      <%= f.text_field :name, class: "validate member-name"%>
+                      <label for="name-<%= m.id %>" class="active">Nome</label>
+                    </div>
+                    <div class="col s12 m5 input-field">
+                      <%= f.email_field :email, class: "validate member-mail" %>
+                      <label for="email-<%= m.id %>" class="active" data-error="Formato incorreto">Email</label>
+                    </div>
+                    <div class="col s3 offset-s3 m1 input-field">
+                      <i class="material-icons icon <%= (m.open)? 'opened' : '' %>">visibility</i>
+                    </div>
+                    <div class="col s3 m1 input-field">
+                      <a href="#" class="remove_member" id="<%= m.id %>">
+                        <i class="material-icons icon">delete</i>
+                      </a>
+                    </div>
                   </div>
-                  <div class="col s12 m5 input-field">
-                    <input id="email" type="email" class="validate" value="<%= m.email %>">
-                    <label for="email" class="active" data-error="Formato incorreto">Email</label>
-                  </div>
-                  <div class="col s3 offset-s3 m1 input-field">
-                    <i class="material-icons icon <%= (m.open)? 'opened' : '' %>">visibility</i>
-                  </div>
-                  <div class="col s3 m1 input-field">
-                    <a href="#" class="remove_member" id="<%= m.id %>">
-                      <i class="material-icons icon">delete</i>
-                    </a>
-                  </div>
-                </div>
+                <% end %>
               </div>
             <% end %>
           </div>
 
-          <%= form_for(Member.new) do |f| %>
+          <%= form_for(Member.new, html: {class: 'member-form'}) do |f| %>
             <div class="member">
               <div class="row">
                 <%= f.hidden_field :campaign_id, value: @campaign.id %>
                 <div class="col s12 m5 input-field">
-                  <%= f.text_field :name, class: "validate"%>
+                  <%= f.text_field :name, class: "validate new-member member-name"%>
                   <label for="name" class="active">Nome</label>
                 </div>
                 <div class="col s12 m5 input-field">
-                  <%= f.email_field :email, class: "validate" %>
+                  <%= f.email_field :email, class: "validate new-member member-mail" %>
                   <label for="member[email]" class="active" data-error="Formato incorreto">Email</label>
                 </div>
               </div>
