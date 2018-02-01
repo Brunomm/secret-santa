@@ -1,16 +1,3 @@
-
-<div id="modal-confirm-destroy" class="modal">
-  <div class="modal-content">
-    <h4>Tem certeza que deseja excluir a campanha?</h4>
-  </div>
-  <div class="modal-footer">
-    <a href="javascript:;" class="modal-action modal-close waves-effect waves-teal btn-flat red-text">Cancelar</a>
-    <%= form_for @campaign, method: 'delete', html: {class: 'remove_campaign', style: 'display: inline;'} do |f| %>
-    <button type='submit' class="modal-action modal-close waves-effect waves-green btn-flat">Sim, excluir agora!</button>
-    <% end %>
-  </div>
-</div>
-
 <div class="row campaigns">
   <div class="col s8 offset-s2">
     <p class="title">Informações</p>
@@ -113,7 +100,18 @@
   <div class="row btn-actions">
     <div class="col s12 center">
       <div class="col s6 m3 offset-m3 l2 offset-l4">
-        <a class="waves-effect waves-light btn modal-trigger red text-blue" href="#modal-confirm-destroy">Excluir</a>
+        <button class="waves-effect waves-light btn custom-modal-trigger red text-blue" data-target="modal-confirm-destroy">Excluir</button>
+        <div id="modal-confirm-destroy" class="modal">
+          <div class="modal-content">
+            <h4>Tem certeza que deseja excluir a campanha?</h4>
+          </div>
+          <div class="modal-footer">
+            <a href="javascript:;" class="modal-action modal-close waves-effect waves-teal btn-flat red-text">Cancelar</a>
+            <%= form_for @campaign, method: 'delete', html: {class: 'remove_campaign', style: 'display: inline;'} do |f| %>
+              <button type='submit' class="modal-action modal-close waves-effect waves-green btn-flat">Sim, excluir agora!</button>
+            <% end %>
+          </div>
+        </div>
       </div>
       <div class="col s6 m3 l3">
         <%= form_tag(raffle_campaign_path(@campaign), method: 'post', class: 'raffle_campaign') do %>
